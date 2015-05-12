@@ -16,6 +16,13 @@ namespace TestExercitii
             Winter
         }
 
+        enum DiscountType
+        { 
+            General,
+            Promotion,
+            BestDeal
+        }
+
         static void Main(string[] args)
         {
             /****************
@@ -48,11 +55,45 @@ namespace TestExercitii
             aCountry = LongestCountryName(countryArray);
             Console.WriteLine("The country with the longest name is {0}, and it has {1} letters.", aCountry, aCountry.Length);
              * 
-            ****************/
 
+             * Exercise 5,6,7
             double finalPrice = 0;
-            GetPriceWithDiscount(200.10, 5, out finalPrice);
+            GetPriceWithDiscount(200.10, 20, out finalPrice);
             Console.WriteLine("The final price is: " + finalPrice);
+            GetPriceWithDiscount(200.10, 20, out finalPrice);
+            finalPrice = GetPriceWithDiscount(200.10, 20, DiscountType.BestDeal);
+            Console.WriteLine("The final price is: " + finalPrice);
+
+            double price = 200.10;
+            int age = 15;
+            GetPriceWithDiscount(ref price, age);
+            Console.WriteLine("The final price is: " + finalPrice);
+             
+
+            double price = 200.50;
+            int age = 20;
+            double finalPrice = 0;
+
+            finalPrice = GetPriceWithDiscount(price);
+            finalPrice = GetPriceWithDiscount(price, DiscountType.Promotion);
+            finalPrice = GetPriceWithDiscount(price, DiscountType.Promotion, age);
+            ******************/
+
+            double price = 200.50;
+            int age = 3;
+            double finalPrice = 0;
+
+            finalPrice = GetPriceWithDiscount(price);
+            Console.WriteLine(finalPrice);
+            finalPrice = GetPriceWithDiscount(price, DiscountType.Promotion);
+            Console.WriteLine(finalPrice);
+            finalPrice = GetPriceWithDiscount(price, DiscountType.Promotion, age);
+            Console.WriteLine(finalPrice);
+
+            int price2 = 23;
+            finalPrice = GetPriceWithDiscount(price2, DiscountType.Promotion, age);
+            Console.WriteLine(finalPrice);
+
         }
 
 
@@ -98,7 +139,7 @@ namespace TestExercitii
         }
 
 
-        static void GetPriceWithDiscount(double price, int age, out double priceWithDiscount)
+        static void GetPriceWithDiscount(double price, out double priceWithDiscount, int age = 14)
         {
             double discount = 0;
 
@@ -110,12 +151,83 @@ namespace TestExercitii
             {
                 discount = 0.15;
             }
-            else 
+            else
             {
-                discount = 0.5;
+                discount = 0.05;
             }
 
-            priceWithDiscount = discount * price;
+            priceWithDiscount = (1 - discount) * price;
+        }
+
+
+        static double GetPriceWithDiscount(double price, DiscountType discountType = DiscountType.General, int age = 14)
+        {
+            double priceWithDiscount = 0, discount = 0;
+
+            if (age < 7)
+            {
+                discount = 0.25;
+            }
+            else if (age < 14)
+            {
+                discount = 0.15;
+            }
+            else 
+            {
+                discount = 0.05;
+            }
+
+            switch (discountType)
+            { 
+                case DiscountType.Promotion:
+                    discount += 0.25;
+                    break;
+                case DiscountType.BestDeal:
+                    discount += 0.5;
+                    break;
+            }
+
+            priceWithDiscount = (1 - discount) * price;
+            return priceWithDiscount;
+        }
+
+
+        static double GetPriceWithDiscount(int price, DiscountType discountType = DiscountType.General, int age = 14)
+        {
+            double priceWithDiscount = 0, discount = 0;
+
+            if (age < 7)
+            {
+                discount = 0.25;
+            }
+            else if (age < 14)
+            {
+                discount = 0.15;
+            }
+            else
+            {
+                discount = 0.05;
+            }
+
+            switch (discountType)
+            {
+                case DiscountType.Promotion:
+                    discount += 0.25;
+                    break;
+                case DiscountType.BestDeal:
+                    discount += 0.5;
+                    break;
+            }
+
+            priceWithDiscount = (1 - discount) * price;
+            return priceWithDiscount;
+        }
+
+
+        static void GetPriceWithDiscount(ref double price, int age)
+        {
+            double initialPrice = price;
+            GetPriceWithDiscount(initialPrice, out price, age);
         }
     }
 }
