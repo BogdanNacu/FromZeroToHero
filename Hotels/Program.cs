@@ -31,7 +31,12 @@ namespace Hotels
             hotel.rooms = new Room[] { room1, room2 };
             hotel.stars = 5;
 
-            Console.WriteLine("Hotel {0} at {1} opened {2} and has {3} rooms.", hotel.name, hotel.address, hotel.openingDate, hotel.rooms.Length);
+            //Console.Write("Hotel {0} at {1} opened {2} and has {3} rooms.", hotel.name, hotel.address, hotel.openingDate, hotel.rooms.Length);
+            //Console.WriteLine(" Hotel description: " + hotel.description);
+
+            //room1.DisplayInfo();
+            //room2.DisplayInfo();
+            hotel.DisplayInfo();
         }
     }
 }

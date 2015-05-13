@@ -20,5 +20,10 @@ namespace Hotels
         public string description;
         public int number, floor;
         public RoomTypes type;
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine("Floor: {0}\nNumber of guests: {1}\nDescription: {2}\nRoom Type: {3}\n", floor, number, description, type);
+        }
     }
 }
