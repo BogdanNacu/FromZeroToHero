@@ -19,6 +19,9 @@ namespace Hotels
             Console.WriteLine(Hotel.GetDistanceMeasurementUnit());
             hotel.DisplayInfo();
             hotel2.DisplayInfo();
+
+            Console.WriteLine("Distance to center: {0} {1}", hotel.distanceToCenter, Hotel.GetDistanceMeasurementUnit());
+            Console.WriteLine("Distance in miles: {0} Miles", hotel.GetDistanceToCenterInUnits("Miles"));
         }
     }
 }

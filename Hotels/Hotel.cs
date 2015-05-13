@@ -41,6 +41,19 @@ namespace Hotels
             return distanceMeasurementUnit;
         }
 
+        public double GetDistanceToCenterInUnits(string measurementUnit)
+        {
+            if (distanceMeasurementUnit.Equals(measurementUnit))
+                return distanceToCenter;
+            else
+                if (measurementUnit.Equals("Km"))
+                    return DistanceMeasurementConverter.TransformMilesToKilometers(distanceToCenter);
+                else
+                    if (measurementUnit.Equals("Miles"))
+                        return DistanceMeasurementConverter.TransformKilometersToMiles(distanceToCenter);
+            return -1;
+        }
+
         public void DisplayInfo()
         {
             //---Alternative to hotel display info:
