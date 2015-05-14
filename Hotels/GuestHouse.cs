@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hotels
 {
-    class Hotel : Property
+    class GuestHouse : Property
     {
     }
 }
