@@ -8,12 +8,111 @@ namespace Hotels
 {
     class Hotel
     {
-        public string name, description, address;
-        public int stars;
-        public double distanceToCenter;
-        public DateTime openingDate;
-        public Room[] rooms;
+        private string name, description, address;
+        private int stars;
+        private double distanceToCenter;
+        private DateTime openingDate;
+        private Room[] rooms;
         static protected string distanceMeasurementUnit;
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (value.Length > 50)
+                {
+                    Console.WriteLine("Max name length is 50 characters!");
+                    name = null;
+                }
+                else
+                    name = value;
+            }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                if (value.Length > 500)
+                {
+                    Console.WriteLine("Max description length is 500 characters!");
+                    description = null;
+                }
+                else
+                    description = value;
+            }
+        }
+
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                if (value.Length > 100)
+                {
+                    Console.WriteLine("Max address length is 100 characters!");
+                    address = null;
+                }
+                else
+                    address = value;
+            }
+        }
+
+        public int Stars
+        {
+            get { return stars; }
+            set
+            {
+                if (value < 0 || value > 5)
+                {
+                    Console.WriteLine("Stars: only from 0 to 5!");
+                    stars = 0;
+                }
+                else
+                    stars = value;
+            }
+        }
+
+        public double DistanceToCenter
+        {
+            get { return distanceToCenter; }
+            set
+            {
+                if (value > 100 || value < 0)
+                {
+                    Console.WriteLine("Distance to center is between 0 to 100!");
+                    distanceToCenter = 0;
+                }
+                else
+                    distanceToCenter = value;
+            }
+        }
+
+        public DateTime OpeningDate
+        {
+            get { return openingDate; }
+            set
+            {
+                if (value > DateTime.Now || value < new DateTime(1800, 1, 1))
+                {
+                    Console.WriteLine("Max name length is 50 characters!");
+                    openingDate = new DateTime();
+                }
+                else
+                    openingDate = value;
+            }
+        }
+
+        public Room[] Rooms
+        {
+            get { return rooms; }
+            set
+            {
+                rooms = value;
+            }
+        }
 
         static Hotel()
         {

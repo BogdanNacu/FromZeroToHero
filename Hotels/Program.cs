@@ -20,7 +20,7 @@ namespace Hotels
             hotel.DisplayInfo();
             hotel2.DisplayInfo();
 
-            Console.WriteLine("Distance to center: {0} {1}", hotel.distanceToCenter, Hotel.GetDistanceMeasurementUnit());
+            Console.WriteLine("Distance to center: {0} {1}", hotel.DistanceToCenter, Hotel.GetDistanceMeasurementUnit());
             Console.WriteLine("Distance in miles: {0} Miles", hotel.GetDistanceToCenterInUnits("Miles"));
         }
     }
