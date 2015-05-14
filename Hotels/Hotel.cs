@@ -15,6 +15,7 @@ namespace Hotels
         private Room[] rooms;
         static protected string distanceMeasurementUnit;
 
+        #region Properties
         public string Name
         {
             get { return name; }
@@ -113,6 +114,10 @@ namespace Hotels
                 rooms = value;
             }
         }
+
+        public bool HasIndoorPool { get; set; }
+        public bool HasFreeWiFi { get; set; }
+        #endregion
 
         static Hotel()
         {

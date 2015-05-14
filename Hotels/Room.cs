@@ -22,6 +22,7 @@ namespace Hotels
         private int places;
         private RoomTypes type;
 
+        #region Properties
         public RoomTypes Type
         {
             get { return type; }
@@ -90,6 +91,10 @@ namespace Hotels
                     places = value;
             }
         }
+
+        public bool HasAirConditioning { get; set; }
+        public bool HasFlatScreenTV { get; set; }
+        #endregion
 
         public Room(string description, int number, int floor, RoomTypes type)
         {
