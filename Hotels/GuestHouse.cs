@@ -16,6 +16,25 @@ namespace Hotels
         {
             ComfortIndex = comfortIndex;
         }
+
+        private double Round(double nrLikes)
+        {
+            if (nrLikes > 10000)
+                return (double)10000;
+            else
+                return (double)nrLikes;
+        }
+
+        sealed public override double CalculateRating()
+        {
+            return ComfortIndex * 0.6 + 2 * (double)Stars * 0.4;
+        }
+
+        public override void DisplayInfo()
+        {
+            base.DisplayInfo();
+            Console.WriteLine("Comfort Index: {0}\n", ComfortIndex);
+        }
     }
 
 

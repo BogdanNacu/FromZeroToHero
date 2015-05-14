@@ -10,8 +10,11 @@ namespace Hotels
     {
         static void Main(string[] args)
         {
+            
             Room room1 = new Room("This is room1.", 3, 2, RoomTypes.Single);
             Room room2 = new Room("This is room2.", 10, 5, RoomTypes.KingBedroom);
+
+            /* *
             Property hotel = new Property("Freedom", "Pretty sweet.", "Bld. Independentei, nr. 3", 5, 12.3, new DateTime(1990, 12, 1), new Room[] { room1, room2 });
 
             Property.SetDistanceMeasurementUnit("Km");
@@ -32,6 +35,16 @@ namespace Hotels
             Hotel hotel2 = new Hotel("SpaceX", "Space themed hotel", "Moon 13", 10, 200, new DateTime(2015, 12, 1), new Room[] { room2 }, 10000);
             hotel2.ChangeAddress("Mars 13");
             hotel2.DisplayInfo();
+             * */
+
+            Property guestHouse2 = new GuestHouse("Margareta", "Aer de munte...", "Str. Panseluta", 4, 34.2, new DateTime(2011, 10, 2), new Room[] { room1 }, 3);
+            Console.WriteLine("\nRatings - Guest House Rating: {0}", guestHouse2.CalculateRating());
+            Property hotel4 = new Hotel("SpaceX", "Space themed hotel", "Moon 13", 5, 200, new DateTime(2014, 12, 1), new Room[] { room2 }, 10000);
+            Console.WriteLine("\nRatings - Hotel Rating: {0}", hotel4.CalculateRating());
+
+            Console.WriteLine("Display Info Test: \n\n");
+            guestHouse2.DisplayInfo();
+            hotel4.DisplayInfo();
         }
     }
 }

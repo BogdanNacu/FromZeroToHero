@@ -21,5 +21,24 @@ namespace Hotels
         {
             this.address = address;
         }
+
+        private double Round(double nrLikes)
+        {
+            if (nrLikes > 10000)
+                return (double)10000;
+            else
+                return (double)nrLikes;
+        }
+
+        public override double CalculateRating()
+        {
+            return (Round(Likes)/1000 * 0.3 + 2* Stars * 0.7);
+        }
+
+        public override void DisplayInfo()
+        {
+            base.DisplayInfo();
+            Console.WriteLine("Number of likes: {0}\n", Likes);
+        }
     }
 }

@@ -99,7 +99,7 @@ namespace Hotels
             {
                 if (value > DateTime.Now || value < new DateTime(1800, 1, 1))
                 {
-                    Console.WriteLine("Max name length is 50 characters!");
+                    Console.WriteLine("Wrong Date!");
                     openingDate = new DateTime();
                 }
                 else
@@ -164,7 +164,12 @@ namespace Hotels
             return -1;
         }
 
-        public void DisplayInfo()
+        public virtual double CalculateRating()
+        {
+            return 2 * Stars;
+        }
+
+        public virtual void DisplayInfo()
         {
             //---Alternative to hotel display info:
             //Console.Write("Hotel {0} at {1} opened {2} and has {3} rooms.", name, address, openingDate, rooms.Length);
