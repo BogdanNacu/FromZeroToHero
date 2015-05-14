@@ -21,7 +21,12 @@ namespace Hotels
             hotel2.DisplayInfo();
 
             Console.WriteLine("Distance to center: {0} {1}", hotel.DistanceToCenter, Hotel.GetDistanceMeasurementUnit());
-            Console.WriteLine("Distance in miles: {0} Miles", hotel.GetDistanceToCenterInUnits("Miles"));
+            Console.WriteLine("Distance in miles: {0} Miles\n", hotel.GetDistanceToCenterInUnits("Miles"));
+
+            Hotel hotel3 = new Hotel { Name = "Wind", Description = "Feel thye winds.", Address = "Str. Fortuna, nr.2", 
+                HasFreeWiFi = true, HasIndoorPool = true, DistanceToCenter = 55.3, OpeningDate = new DateTime(2010,12,5), 
+                Stars = 2, Rooms = new Room[] {room1, room2} };
+            hotel3.DisplayInfo();
         }
     }
 }

@@ -124,6 +124,11 @@ namespace Hotels
             distanceMeasurementUnit = "Miles";
         }
 
+        public Hotel()
+        {
+
+        }
+
         public Hotel(string name, string description, string address, int stars, double distanceToCenter, DateTime openingDate, Room[] rooms)
         {
             this.Name = name;
