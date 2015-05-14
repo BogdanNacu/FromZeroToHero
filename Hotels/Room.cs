@@ -93,15 +93,15 @@ namespace Hotels
 
         public Room(string description, int number, int floor, RoomTypes type)
         {
-            this.description = description;
-            this.number = number;
-            this.floor = floor;
-            this.type = type;
+            this.Description = description;
+            this.Number = number;
+            this.Floor = floor;
+            this.Type = type;
         }
 
         public void DisplayInfo()
         {
-            Console.WriteLine("Floor: {0}\nNumber of guests: {1}\nDescription: {2}\nRoom Type: {3}\n", floor, number, description, type);
+            Console.WriteLine("Floor: {0}\nNumber of guests: {1}\nDescription: {2}\nRoom Type: {3}\n", Floor, Number, Description, Type);
         }
     }
 }

@@ -121,13 +121,13 @@ namespace Hotels
 
         public Hotel(string name, string description, string address, int stars, double distanceToCenter, DateTime openingDate, Room[] rooms)
         {
-            this.name = name;
-            this.description = description;
-            this.address = address;
-            this.stars = stars;
+            this.Name = name;
+            this.Description = description;
+            this.Address = address;
+            this.Stars = stars;
             this.distanceToCenter = distanceToCenter;
-            this.openingDate = openingDate;
-            this.rooms = rooms;
+            this.OpeningDate = openingDate;
+            this.Rooms = rooms;
         }
 
         public static void SetDistanceMeasurementUnit(string measurementUnit)
@@ -158,13 +158,13 @@ namespace Hotels
             //---Alternative to hotel display info:
             //Console.Write("Hotel {0} at {1} opened {2} and has {3} rooms.", name, address, openingDate, rooms.Length);
             //Console.Write("It is rated {0} stars");
-            //Console.WriteLine(" Hotel description: " + description);
+            //Console.WriteLine(" Hotel description: ..." + description);
             //---
 
-            Console.Write("Hotel Name: {0}\n Description: {1}\n Address: {2}\n Stars: {3}\n", name, description, address, stars);
-            Console.WriteLine(" Distance to center: {0} {1}", distanceToCenter, distanceMeasurementUnit);
+            Console.Write("Hotel Name: {0}\n Description: {1}\n Address: {2}\n Stars: {3}\n", Name, Description, Address, Stars);
+            Console.WriteLine(" Distance to center: {0} {1}", DistanceToCenter, distanceMeasurementUnit);
 
-            Console.WriteLine(" Opening date: {1}\n\n Rooms: ", distanceToCenter, openingDate);
+            Console.WriteLine(" Opening date: {1}\n\n Rooms: ", DistanceToCenter, OpeningDate);
             for (int i = 0; i < rooms.Length; i++ )
             {
                 Console.WriteLine("Room {0}:", i);
