@@ -8,7 +8,8 @@ namespace Hotels
 {
     class Property
     {
-        private string name, description, address;
+        private string name, description;
+        protected string address;
         private int stars;
         private double distanceToCenter;
         private DateTime openingDate;
