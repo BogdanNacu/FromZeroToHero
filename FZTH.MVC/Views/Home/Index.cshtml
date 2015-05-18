@@ -2,30 +2,160 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <!--<script src="hotel_script.js"></script>-->
+    <script src="hotel_object.js"></script>
+    <meta charset="utf-8" />
+    <title>Booking</title>
+</head>
+<body>
+    <header class="col-md-12 col-xs-12 bg-info">Booking</header>
+    @Html.Partial("NavView")
+
+    <div class="row">
+        <aside class="col-md-3 col-xs-3">
+            <h3>History</h3>
+            <ul>
+                <li><a href="#home">Reservation Form</a></li>
+                <li><a href="#search">Hotel List</a></li>
+                <li><a href="#hotels_table">Last minute deals</a></li>
+            </ul>
+        </aside>
+        <article class="col-md-9 col-xs-9">
+            <section>
+                <p title="P Elem" class="bg-info">Title</p>
+            </section>
+
+            <section id="search">
+                <form class="form-horizontal">
+                    <datalist id="cities">
+                        <option value="Iasi"></option>
+                        <option value="Bucuresti"></option>
+                        <option value="Cluj"></option>
+                    </datalist>
+
+                    <div class="form-group">
+                        <label for="city" class="col-xs-2 col-md-2">City</label>
+                        <input list="cities" id="city" class="col-xs-9 col-md-9" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="check_in" class="col-xs-2 col-md-2">Check in:</label>
+                        <input type="date" id="check_in" class="col-xs-9 col-md-9" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="check_out" class="col-xs-2 col-md-2">Check out:</label>
+                        <input type="date" id="check_out" class="col-xs-9 col-md-9" required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary col-xs-1 col-md-1 col-md-offset-10">Search</button>
+                    </div>
+                </form>
+            </section>
+
+
+            <section id="hotels_table">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>Rating</th>
+                    </tr>
+
+                    @using FZTH.MVC.Data;
+                    @foreach (var h in Data.Hotels)
+                    {
+
+                        <td>@h.Name</td>
+                        <td>@h.Description</td>
+                        <td>@h.Country</td>
+                        <td>@h.City</td>
+
+                        <td>
+                            @for (int i = 0; i < h.Rating; i++)
+                            {
+                                <img src="@Url.Content("~/content/images/star.jpg")" height="50px" width="50px" />
+                            }
+                        </td>
+                        </tr>
+                    }
+                    @*
+                        <tr>
+                            <td>Traian</td>
+                            <td>foo</td>
+                            <td>bar</td>
+                            <td>
+                                <a href="http://www.google.com" target="_blank"> Baz</a>
+                            </td>
+                            <td>4</td>
+                            <td>
+                                <img src="star.jpg" height="50" width="50" class="img-rounded" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Intecont</td>
+                            <td>foo</td>
+                            <td>bar</td>
+                            <td>baz</td>
+                            <td>4</td>
+                            <td>
+                                <img src="star.jpg" height="50" width="50" />
+                                <img src="star.jpg" height="50" width="50" />
+                                <img src="star.jpg" height="50" width="50" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Elefant</td>
+                            <td>foo</td>
+                            <td>Baz</td>
+                            <td>baz</td>
+                            <td>205</td>
+                            <td>
+                                <img src="star.jpg" height="50" width="50" />
+                                <img src="star.jpg" height="50" width="50" />
+                                <img src="star.jpg" height="50" width="50" />
+                                <img src="star.jpg" height="50" width="50" />
+                                <img src="star.jpg" height="50" width="50" />
+                            </td>
+                        </tr>
+                    *@
+                </table>
+            </section>
+
+            <section id="last_minute">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Hotel Name</th>
+                        <th>Hotel Picture</th>
+                        <th>Discount</th>
+                    </tr>
+                    <tr>
+                        <td>Azure</td>
+                        <td>dsa</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td>Intercontinental</td>
+                        <td>dsa</td>
+                        <td>25%</td>
+                    </tr>
+                    <tr>
+                        <td>Ramada</td>
+                        <td>dsa</td>
+                        <td>35%</td>
+                    </tr>
+                </table>
+            </section>
+        </article>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    <footer class="col-md-12 col-xs-12 bg-success">From Zero to Hero Teamnet Iasi</footer>
+</body>
+</html>

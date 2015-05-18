@@ -26,5 +26,24 @@ namespace FZTH.MVC.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public string Hello(Person persson)
+        {
+            //return "Hello " + name + age;
+
+            return persson.ToString();
+        }
+
+        public class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+
+            public override string ToString()
+            {
+                return String.Format("{0} age {1}", Name, Age);
+            }
+        }
     }
 }
