@@ -1,6 +1,10 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<Hotel>
+@{
+    ViewBag.Title = "HotelListView";
 }
+
+
+
 
 <!DOCTYPE html>
 
@@ -14,6 +18,7 @@
     <title>Booking</title>
 </head>
 <body>
+    <h2>HotelListView</h2>
     <header class="col-md-12 col-xs-12 bg-info">Booking</header>
     @Html.Partial("NavView")
 
@@ -67,74 +72,27 @@
                         <th>City</th>
                         <th>Rating</th>
                     </tr>
+                    @using FZTH.MVC.Data;
+                    @foreach (var h in Model)
+                    {
+                        <tr>
+                            <td>@h.Name</td>
+                            <td>@h.Description</td>
+                            <td>@h.Country</td>
+                            <td>@h.City</td>
 
-                    @*
-                        <tr>
-                            <td>Traian</td>
-                            <td>foo</td>
-                            <td>bar</td>
                             <td>
-                                <a href="http://www.google.com" target="_blank"> Baz</a>
-                            </td>
-                            <td>4</td>
-                            <td>
-                                <img src="star.jpg" height="50" width="50" class="img-rounded" />
+                                @for (int i = 0; i < h.Rating; i++)
+                                {
+                                    <img src="@Url.Content("~/content/images/star.jpg")" height="50px" width="50px" />
+                                }
                             </td>
                         </tr>
-                        <tr>
-                            <td>Intecont</td>
-                            <td>foo</td>
-                            <td>bar</td>
-                            <td>baz</td>
-                            <td>4</td>
-                            <td>
-                                <img src="star.jpg" height="50" width="50" />
-                                <img src="star.jpg" height="50" width="50" />
-                                <img src="star.jpg" height="50" width="50" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Elefant</td>
-                            <td>foo</td>
-                            <td>Baz</td>
-                            <td>baz</td>
-                            <td>205</td>
-                            <td>
-                                <img src="star.jpg" height="50" width="50" />
-                                <img src="star.jpg" height="50" width="50" />
-                                <img src="star.jpg" height="50" width="50" />
-                                <img src="star.jpg" height="50" width="50" />
-                                <img src="star.jpg" height="50" width="50" />
-                            </td>
-                        </tr>
-                    *@
+                    }
                 </table>
             </section>
 
-            <section id="last_minute">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Hotel Name</th>
-                        <th>Hotel Picture</th>
-                        <th>Discount</th>
-                    </tr>
-                    <tr>
-                        <td>Azure</td>
-                        <td>dsa</td>
-                        <td>15%</td>
-                    </tr>
-                    <tr>
-                        <td>Intercontinental</td>
-                        <td>dsa</td>
-                        <td>25%</td>
-                    </tr>
-                    <tr>
-                        <td>Ramada</td>
-                        <td>dsa</td>
-                        <td>35%</td>
-                    </tr>
-                </table>
-            </section>
+           
         </article>
 
     </div>

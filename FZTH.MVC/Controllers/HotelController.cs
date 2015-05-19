@@ -12,9 +12,9 @@ namespace FZTH.MVC.Controllers
         //
         // GET: /Hotel/
         [HttpGet]
-        public string Index()
+        public ActionResult Index()
         {
-            return "Here will be the list of hotels.";
+            return View("HotelListView", Data.Data.Hotels);
         }
 
         /*[HttpGet]
@@ -28,25 +28,5 @@ namespace FZTH.MVC.Controllers
             return HttpNotFound();
         }*/
 
-        public class Hotel
-        {
-            public Int32 Id { get; set; }
-            public string Name { get; set; }
-            public int Stars { get; set; }
-            public string Description { get; set; }
-            public string City { get; set; }
-            public string County { get; set; }
-        }
-
-        public class HotelList
-        {
-            private List<Hotel> hotels;
-            public List<Hotel> Hotels { get { return hotels; } }
-
-            public HotelList()
-            {
-                hotels = new List<Hotel>();
-            }
-        }
 	}
 }

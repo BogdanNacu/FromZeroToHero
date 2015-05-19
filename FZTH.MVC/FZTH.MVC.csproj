@@ -109,9 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Data\" />
     <Folder Include="Views\Foo\" />
-    <Folder Include="Views\Hotel\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -120,8 +119,8 @@
     <Compile Include="Controllers\FooController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
-    <Compile Include="Data\Hotel.cs" />
-    <Compile Include="Data\HotelList.cs" />
+    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\HotelList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -159,7 +158,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\NavView.cshtml" />
+    <Content Include="Views\Shared\NavView.cshtml" />
+    <Content Include="Views\Hotel\HotelListView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hotels\Hotels.csproj">
