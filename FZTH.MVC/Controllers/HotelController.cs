@@ -36,6 +36,25 @@ namespace FZTH.MVC.Controllers
             Data.Data.Hotels.Remove(h);
             return RedirectToAction("Index");
         }
+        
+        
+        public ActionResult Create()
+        {
+            return View("Create");
+        }
+
+        [HttpPost]
+        public ActionResult Create(Hotel h)
+        {
+            int idmax = 0;
+            for(int i = 0; i< Data.Data.Hotels.Count; i++)
+                if(Data.Data.Hotels[i].Id > idmax)
+                    idmax = i;
+            h.Id = idmax;
+            Data.Data.Hotels.Add(h);
+
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public ActionResult Detail(Int32 id)

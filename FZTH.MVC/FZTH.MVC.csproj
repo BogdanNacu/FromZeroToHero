@@ -161,6 +161,7 @@
     <Content Include="Views\Shared\NavView.cshtml" />
     <Content Include="Views\Hotel\HotelListView.cshtml" />
     <Content Include="Views\Hotel\Delete.cshtml" />
+    <Content Include="Views\Hotel\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hotels\Hotels.csproj">
