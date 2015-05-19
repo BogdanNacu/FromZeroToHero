@@ -7,11 +7,11 @@ namespace FZTH.MVC.Data
 {
     public static class Data
     {
-        public static List<Hotel> Hotels
+        public static List<Hotel> Hotels{  get;  set;  }
+
+        static Data()
         {
-            get
-            {
-                return new List<Hotel>()
+            Hotels = new List<Hotel>()
                 {
                     new Hotel
                     {
@@ -40,9 +40,8 @@ namespace FZTH.MVC.Data
                         City = "Roman",
                         Country = "Neamt"
                     }
+            
                 };
-            }
         }
     }
-
 }

@@ -160,6 +160,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\NavView.cshtml" />
     <Content Include="Views\Hotel\HotelListView.cshtml" />
+    <Content Include="Views\Hotel\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hotels\Hotels.csproj">

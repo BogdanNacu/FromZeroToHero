@@ -71,6 +71,7 @@
                         <th>Country</th>
                         <th>City</th>
                         <th>Rating</th>
+                        <th>Actions</th>
                     </tr>
                     @using FZTH.MVC.Data;
                     @foreach (var h in Model)
@@ -86,6 +87,12 @@
                                 {
                                     <img src="@Url.Content("~/content/images/star.jpg")" height="50px" width="50px" />
                                 }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Create", "CreateHotel", "Hotel");
+                                @Html.ActionLink("Edit", "EditHotel", "Hotel", new { id = h.Id, name = "Maria"}, null);
+                                @Html.ActionLink("Delete", "Delete", "Hotel", new { id = h.Id }, null);
+                             
                             </td>
                         </tr>
                     }

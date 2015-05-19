@@ -14,12 +14,6 @@ namespace FZTH.MVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "AcasaRoute",
-                url: "acasa/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
                 name: "HotelRoute",
                 url: "hotels/{action}/{id}",
                 defaults: new { controller = "Hotel", action = "Index", id = UrlParameter.Optional }
