@@ -3,9 +3,6 @@
     ViewBag.Title = "HotelListView";
 }
 
-
-
-
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -97,6 +94,20 @@
                         </tr>
                     }
                 </table>
+
+                <div>
+                    @section Scripts {
+                        <script type="text/javascript">
+                            $(function () {
+                                $.ajax({
+                                    method: "GET",
+                                    url: '@Url.Action("Hotel","Hotel")',
+                                    dataType: "JSON"
+                                });
+                            });
+                        </script>
+                    }
+                </div>
             </section>
 
            

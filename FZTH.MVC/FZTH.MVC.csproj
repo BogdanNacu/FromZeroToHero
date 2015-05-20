@@ -137,8 +137,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\generator.js" />
+    <Content Include="Scripts\hotels.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -162,6 +165,7 @@
     <Content Include="Views\Hotel\HotelListView.cshtml" />
     <Content Include="Views\Hotel\Delete.cshtml" />
     <Content Include="Views\Hotel\Create.cshtml" />
+    <Content Include="Views\Hotel\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hotels\Hotels.csproj">

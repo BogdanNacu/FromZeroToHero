@@ -43,6 +43,7 @@ namespace FZTH.MVC.Controllers
             return View("Create");
         }
 
+        /*
         [HttpPost]
         public ActionResult Create(Hotel h)
         {
@@ -52,6 +53,51 @@ namespace FZTH.MVC.Controllers
                     idmax = i;
             h.Id = idmax;
             Data.Data.Hotels.Add(h);
+
+            return RedirectToAction("Index");
+        }
+         * */
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(Hotel hotel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(hotel);
+            }
+            var id = Data.Data.Hotels.Max(x => x.Id);
+            hotel.Id = id + 1;
+            Data.Data.Hotels.Add(hotel);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var hotel = Data.Data.Hotels.FirstOrDefault(x => x.Id == id);
+            if (hotel != null)
+            {
+                return View(hotel);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Hotel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var hotel = Data.Data.Hotels.FirstOrDefault(x => x.Id == model.Id);
+            if (hotel != null)
+            {
+                hotel.Name = model.Name;
+                hotel.Description = model.Description;
+                hotel.Country = model.Country;
+                hotel.City = model.City;
+                hotel.Rating = model.Rating;
+            }
 
             return RedirectToAction("Index");
         }
