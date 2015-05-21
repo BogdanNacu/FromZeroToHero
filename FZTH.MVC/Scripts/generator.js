@@ -24,7 +24,10 @@ function generateTable(container, initialHotels) {
     function init() {
         container.empty();
 
-        tableContainer = $('<table/>')
+        tableContainer = $('<table/>', {
+            border: 1,
+            margin: '20px'
+        });
         container.append(tableContainer);
 		
 		addButtons();
@@ -42,10 +45,10 @@ function generateTable(container, initialHotels) {
         var headerRowHtml = '<tr>' +
 			'<th>Name</th>' +
 			'<th>Description</th>' +
-			'<th>Country</th>' +
+			'<th>County</th>' +
 			'<th>City</th>' +
-			'<th>Added date</th>' +
-			'<th>Start price</th>' +
+			'<th>Rating</th>' +
+            '<th>Operations</th>'
 			'</tr>';
 
         var headerRow = $(headerRowHtml);
@@ -59,19 +62,14 @@ function generateTable(container, initialHotels) {
             var hotel = hotels[i];
 
             var row = $('<tr/>', {
-                'data-id': hotel.id
+                'data-id': hotel.Id
             });
 
-            var hotelAddedDate = $.type(hotel.addedDate) == "date"
-				? hotel.addedDate.toDateString()
-				: hotel.addedDate;
-
-            addTextTableCellToRow(row, hotel.name);
-            addTextTableCellToRow(row, hotel.description);
-            addTextTableCellToRow(row, hotel.country);
-            addTextTableCellToRow(row, hotel.city);
-            addTextTableCellToRow(row, hotelAddedDate);
-            addTextTableCellToRow(row, hotel.startPrice);
+            addTextTableCellToRow(row, hotel.Name);
+            addTextTableCellToRow(row, hotel.Description);
+            addTextTableCellToRow(row, hotel.Country);
+            addTextTableCellToRow(row, hotel.City);
+            addTextTableCellToRow(row, hotel.Rating);
 
 			addOperationsCellToRow(row);
 
@@ -81,7 +79,8 @@ function generateTable(container, initialHotels) {
 
     function addTextTableCellToRow(row, text) {
         var cellToAdd = $('<td/>', {
-            text: text
+            text: text,
+            padding: '20px'
         });
         row.append(cellToAdd);
     }
@@ -149,16 +148,15 @@ function generateTable(container, initialHotels) {
      }
 
      function mapRowToHotel(row) {
-         var hotelId = row.data('id');
+         var hotelId = row.data('Id');
 
          var hotel = {
-             id: hotelId,
-             name: getControlValueFromRowByRole(row, 'name'),
-             description: getControlValueFromRowByRole(row, 'description'),
-             country: getControlValueFromRowByRole(row, 'country'),
-             city: getControlValueFromRowByRole(row, 'city'),
-             addedDate: getControlValueFromRowByRole(row, 'addedDate'),
-             startPrice: getControlValueFromRowByRole(row, 'startPrice')
+             Id: hotelId,
+             Name: getControlValueFromRowByRole(row, 'Name'),
+             Description: getControlValueFromRowByRole(row, 'Description'),
+             Country: getControlValueFromRowByRole(row, 'Country'),
+             City: getControlValueFromRowByRole(row, 'City'),
+             Rating: parseInt(getControlValueFromRowByRole(row, 'Rating'))
          };
 
          return hotel;
@@ -211,13 +209,15 @@ function generateTable(container, initialHotels) {
         console.log('onHotelDelete');
 		
 		var row = $(sender).closest('tr');
-        var hotelId = row.data('id');
+		var hotelId = row.data('id');
+		console.log(hotelId);
 		var hotelToRemove = getHotelById(hotelId);
+		console.log(hotelToRemove);
 		
 		if(hotelToRemove != null) {
 			var userHasConfirmedAction = confirm('Are you sure you want to delete the selected hotel (' + hotelToRemove.name + ')?');
 			if(userHasConfirmedAction === true) {
-				removeHotel(hotelToRemove.id);
+				removeHotel(hotelToRemove.Id);
 				refresh();
 			}
 		}
@@ -235,7 +235,7 @@ function generateTable(container, initialHotels) {
             var maxHotelId = getMaxHotelId();
             var newHotelId = maxHotelId + 1;
 
-            hotelFromRow.id = newHotelId;
+            hotelFromRow.Id = newHotelId;
 
             addHotel(hotelFromRow);
         } else {
@@ -256,12 +256,11 @@ function generateTable(container, initialHotels) {
             'class': constants.ROW_ADD_MODE_CLASS
         });
 
-        addTextControlCellToRow(row, 'name');
-        addTextControlCellToRow(row, 'description');
-        addTextControlCellToRow(row, 'country');
-        addTextControlCellToRow(row, 'city');
-        addTextControlCellToRow(row, 'addedDate');
-        addTextControlCellToRow(row, 'startPrice');
+        addTextControlCellToRow(row, 'Name');
+        addTextControlCellToRow(row, 'Description');
+        addTextControlCellToRow(row, 'Country');
+        addTextControlCellToRow(row, 'City');
+        addTextControlCellToRow(row, 'Rating');
         
         addOperationsCellToRowForAddUpdate(row);
 
@@ -274,16 +273,15 @@ function generateTable(container, initialHotels) {
             'class': constants.ROW_UPDATE_MODE_CLASS,
         });
 
-        addTextControlCellToRow(row, 'name', hotel.name);
-        addTextControlCellToRow(row, 'description', hotel.description);
-        addTextControlCellToRow(row, 'country', hotel.country);
-        addTextControlCellToRow(row, 'city', hotel.city);
-        addTextControlCellToRow(row, 'addedDate', hotel.addedDate);
-        addTextControlCellToRow(row, 'startPrice', hotel.startPrice);
+        addTextControlCellToRow(row, 'Name', hotel.Name);
+        addTextControlCellToRow(row, 'Description', hotel.Description);
+        addTextControlCellToRow(row, 'Country', hotel.Country);
+        addTextControlCellToRow(row, 'City', hotel.City);
+        addTextControlCellToRow(row, 'Rating', hotel.Rating);
         
         addOperationsCellToRowForAddUpdate(row);
 
-        var rowToUpdate = tableContainer.find('tr[data-id="' + hotel.id + '"]');
+        var rowToUpdate = tableContainer.find('tr[data-id="' + hotel.Id + '"]');
         rowToUpdate.html(row.html());
     }
 	
@@ -293,7 +291,7 @@ function generateTable(container, initialHotels) {
         var associatedHotel = null;
 
         $.each(hotels, function(hotelIndex, hotel) {
-            if(hotel.id == id) {
+            if(hotel.Id == id) {
                 associatedHotel = hotel;
                 return false;
             }
@@ -306,7 +304,7 @@ function generateTable(container, initialHotels) {
         var maxHotelId = 1;
 
         $.each(hotels, function (hotelIndex, hotel) {
-            var currentHotelId = parseInt(hotel.id);
+            var currentHotelId = parseInt(hotel.Id);
             if (currentHotelId > maxHotelId) {
                 maxHotelId = currentHotelId;
             }
@@ -326,7 +324,7 @@ function generateTable(container, initialHotels) {
         // find the postion in the hotels array of the object that needs to be updated
         for (index = 0; index < hotels.length; index++) {
             var currentHotel = hotels[index];
-            if (currentHotel.id == hotel.id) {
+            if (currentHotel.Id == hotel.Id) {
                 positionToUpdate = index;
 
                 // the position was found so we don't need to search the rest of the array
@@ -352,7 +350,7 @@ function generateTable(container, initialHotels) {
 	// find the postion in the hotels array of the object that needs to be removed
 	for(index = 0; index < hotels.length; index++) {
 		var currentHotel = hotels[index];
-		if(currentHotel.id === hotelId) {
+		if(currentHotel.Id === hotelId) {
 			positionToRemove = index;
 			
 			// the position was found so we don't need to search the rest of the array

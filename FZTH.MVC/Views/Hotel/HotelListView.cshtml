@@ -7,12 +7,12 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" href="bootstrap.min.css" />
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
-    <!--<script src="hotel_script.js"></script>-->
-    <script src="hotel_object.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <meta charset="utf-8" />
     <title>Booking</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/generator.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/main.js")"></script>
 </head>
 <body>
     <h2>HotelListView</h2>
@@ -87,30 +87,38 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Create", "Create", "Hotel");
-                                @Html.ActionLink("Edit", "Edit", "Hotel", new { id = h.Id, name = "Maria"}, null);
+                                @Html.ActionLink("Edit", "Edit", "Hotel", new { id = h.Id, name = "Maria" }, null);
                                 @Html.ActionLink("Delete", "Delete", "Hotel", new { id = h.Id }, null);
-                             
+
                             </td>
                         </tr>
                     }
                 </table>
 
-                <div>
+                <div id="hotelsContainer">
                     @section Scripts {
                         <script type="text/javascript">
                             $(function () {
+                                var hotelsContainer = $('#hotelsContainer');
+
                                 $.ajax({
-                                    method: "GET",
-                                    url: '@Url.Action("Hotel","Hotel")',
-                                    dataType: "JSON"
+                                    url: '@Url.Action("GetJSON","Hotel")',
+                                    dataType: 'json',
+                                    success: function (jsonData) {
+                                        generateTable(hotelsContainer, jsonData);
+                                    },
+                                    error: function () {
+                                        console.log('Error while loading hotels data');
+                                    }
                                 });
+
                             });
                         </script>
                     }
                 </div>
             </section>
 
-           
+
         </article>
 
     </div>

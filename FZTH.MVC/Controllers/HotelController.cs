@@ -112,5 +112,16 @@ namespace FZTH.MVC.Controllers
             }
             return HttpNotFound();
         }
+
+        [HttpGet]
+        public ActionResult GetJSON()
+        {
+            var hotel = Data.Data.Hotels;
+            if (hotel != null)
+            {
+                return Json(hotel, JsonRequestBehavior.AllowGet);
+            }
+            return HttpNotFound();
+        }
     }
 }
