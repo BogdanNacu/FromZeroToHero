@@ -19,10 +19,7 @@ namespace Hotels
 
         private double Round(double nrLikes)
         {
-            if (nrLikes > 10000)
-                return (double)10000;
-            else
-                return (double)nrLikes;
+            return (nrLikes > 10000) ? (double)10000 : nrLikes;
         }
 
         sealed public override double CalculateRating()

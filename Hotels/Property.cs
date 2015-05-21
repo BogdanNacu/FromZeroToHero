@@ -67,7 +67,7 @@ namespace Hotels
             get { return stars; }
             set
             {
-                if (value < 0 || value > 5)
+                if (ValidateStars(value))
                 {
                     Console.WriteLine("Stars: only from 0 to 5!");
                     stars = 0;
@@ -77,12 +77,13 @@ namespace Hotels
             }
         }
 
+
         public double DistanceToCenter
         {
             get { return distanceToCenter; }
             set
             {
-                if (value > 100 || value < 0)
+                if (ValidateDistanceToCenter(value))
                 {
                     Console.WriteLine("Distance to center is between 0 to 100!");
                     distanceToCenter = 0;
@@ -97,7 +98,7 @@ namespace Hotels
             get { return openingDate; }
             set
             {
-                if (value > DateTime.Now || value < new DateTime(1800, 1, 1))
+                if (ValidateDate(value))
                 {
                     Console.WriteLine("Wrong Date!");
                     openingDate = new DateTime();
@@ -119,6 +120,21 @@ namespace Hotels
         public bool HasIndoorPool { get; set; }
         public bool HasFreeWiFi { get; set; }
         #endregion
+
+        private static bool ValidateDistanceToCenter(double value)
+        {
+            return value > 100 || value < 0;
+        }
+
+        private bool ValidateDate(DateTime value)
+        {
+            return value > DateTime.Now || value < new DateTime(1800, 1, 1);
+        }
+
+        private static bool ValidateStars(int value)
+        {
+            return value < 0 || value > 5;
+        }
 
         static Property()
         {
@@ -155,12 +171,10 @@ namespace Hotels
         {
             if (distanceMeasurementUnit.Equals(measurementUnit))
                 return distanceToCenter;
-            else
-                if (measurementUnit.Equals("Km"))
-                    return DistanceMeasurementConverter.TransformMilesToKilometers(distanceToCenter);
-                else
-                    if (measurementUnit.Equals("Miles"))
-                        return DistanceMeasurementConverter.TransformKilometersToMiles(distanceToCenter);
+            if (measurementUnit.Equals("Km"))
+                return DistanceMeasurementConverter.TransformMilesToKilometers(distanceToCenter);
+            if (measurementUnit.Equals("Miles"))
+                return DistanceMeasurementConverter.TransformKilometersToMiles(distanceToCenter);
             return -1;
         }
 
@@ -181,7 +195,7 @@ namespace Hotels
             Console.WriteLine(" Distance to center: {0} {1}", DistanceToCenter, distanceMeasurementUnit);
 
             Console.WriteLine(" Opening date: {1}\n\n Rooms: ", DistanceToCenter, OpeningDate);
-            for (int i = 0; i < rooms.Length; i++ )
+            for (int i = 0; i < rooms.Length; i++)
             {
                 Console.WriteLine("Room {0}:", i);
                 rooms[i].DisplayInfo();

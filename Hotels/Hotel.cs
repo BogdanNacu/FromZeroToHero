@@ -24,15 +24,13 @@ namespace Hotels
 
         private double Round(double nrLikes)
         {
-            if (nrLikes > 10000)
-                return (double)10000;
-            else
-                return (double)nrLikes;
+            return (nrLikes > 10000) ? (double)10000 : nrLikes;
         }
 
         public override double CalculateRating()
         {
-            return (Round(Likes)/1000 * 0.3 + 2* Stars * 0.7);
+            double result = (Round(Likes)/1000 * 0.3 + 2* Stars * 0.7);
+            return result;
         }
 
         public override void DisplayInfo()

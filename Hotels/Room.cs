@@ -6,15 +6,6 @@ using System.Threading.Tasks;
 
 namespace Hotels
 {
-    enum RoomTypes
-    {
-        Single,
-        Double,
-        Twin,
-        Duplex,
-        KingBedroom
-    }
-
     class Room
     {
         private string description;
@@ -52,7 +43,7 @@ namespace Hotels
             get { return number; }
             set
             {
-                if (value < 0 || value > 10000)
+                if (ValidateRoomNumber(value))
                 {
                     Console.WriteLine("Stars: only from 0 to 10000!");
                     number = 0;
@@ -67,7 +58,7 @@ namespace Hotels
             get { return floor; }
             set
             {
-                if (value < 0 || value > 1000)
+                if (ValidateFloor(value))
                 {
                     Console.WriteLine("Floor: only from 0 to 1000!");
                     floor = 0;
@@ -75,6 +66,11 @@ namespace Hotels
                 else
                     floor = value;
             }
+        }
+
+        private static bool ValidateFloor(int value)
+        {
+            return value < 0 || value > 1000;
         }
 
         public int Places
@@ -102,6 +98,11 @@ namespace Hotels
             this.Number = number;
             this.Floor = floor;
             this.Type = type;
+        }
+
+        private static bool ValidateRoomNumber(int value)
+        {
+            return value < 0 || value > 10000;
         }
 
         public void DisplayInfo()
