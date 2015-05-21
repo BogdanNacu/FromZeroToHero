@@ -3,26 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestExercitii.Enums;
 
 namespace TestExercitii
 {
     class Program
     {
-        enum Season
-        { 
-            Spring,
-            Summer,
-            Autumn,
-            Winter
-        }
-
-        enum DiscountType
-        { 
-            General,
-            Promotion,
-            BestDeal
-        }
-
         static void Main(string[] args)
         {
             /****************
@@ -43,7 +29,7 @@ namespace TestExercitii
             
              * Exercise 2
 
-            Season s = Season.Winter;
+            Seasons s = Seasons.Winter;
             PrintSeason(s);
 
              * Exercise 3+4
@@ -103,20 +89,20 @@ namespace TestExercitii
         }
 
 
-        static void PrintSeason(Season aSeason)
+        static void PrintSeason(Seasons aSeason)
         {
             switch (aSeason)
             {
-                case Season.Spring:
+                case Seasons.Spring:
                     Console.WriteLine("Spring is here!");
                     break;
-                case Season.Summer:
+                case Seasons.Summer:
                     Console.WriteLine("Summer time!");
                     break;
-                case Season.Autumn:
+                case Seasons.Autumn:
                     Console.WriteLine("It's autumn!");
                     break;
-                case Season.Winter:
+                case Seasons.Winter:
                     Console.WriteLine("Winter is coming!");
                     break;
             }
@@ -143,6 +129,14 @@ namespace TestExercitii
         {
             double discount = 0;
 
+            discount = GetDiscountByAge(age);
+
+            priceWithDiscount = (1 - discount) * price;
+        }
+
+        static private double GetDiscountByAge(int age)
+        {
+            double discount;
             if (age < 7)
             {
                 discount = 0.25;
@@ -155,8 +149,7 @@ namespace TestExercitii
             {
                 discount = 0.05;
             }
-
-            priceWithDiscount = (1 - discount) * price;
+            return discount;
         }
 
 
@@ -164,21 +157,19 @@ namespace TestExercitii
         {
             double priceWithDiscount = 0, discount = 0;
 
-            if (age < 7)
-            {
-                discount = 0.25;
-            }
-            else if (age < 14)
-            {
-                discount = 0.15;
-            }
-            else 
-            {
-                discount = 0.05;
-            }
+            discount = GetDiscountByAge(age);
 
+            discount += GetDiscountByType(discountType);
+
+            priceWithDiscount = (1 - discount) * price;
+            return priceWithDiscount;
+        }
+
+        static double GetDiscountByType(DiscountType discountType)
+        {
+            double discount = 0;
             switch (discountType)
-            { 
+            {
                 case DiscountType.Promotion:
                     discount += 0.25;
                     break;
@@ -186,9 +177,7 @@ namespace TestExercitii
                     discount += 0.5;
                     break;
             }
-
-            priceWithDiscount = (1 - discount) * price;
-            return priceWithDiscount;
+            return discount;
         }
 
 
@@ -196,28 +185,9 @@ namespace TestExercitii
         {
             double priceWithDiscount = 0, discount = 0;
 
-            if (age < 7)
-            {
-                discount = 0.25;
-            }
-            else if (age < 14)
-            {
-                discount = 0.15;
-            }
-            else
-            {
-                discount = 0.05;
-            }
+            discount = GetDiscountByAge(age);
 
-            switch (discountType)
-            {
-                case DiscountType.Promotion:
-                    discount += 0.25;
-                    break;
-                case DiscountType.BestDeal:
-                    discount += 0.5;
-                    break;
-            }
+            discount += GetDiscountByType(discountType);
 
             priceWithDiscount = (1 - discount) * price;
             return priceWithDiscount;
