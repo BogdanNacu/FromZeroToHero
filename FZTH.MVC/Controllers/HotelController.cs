@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FZTH.MVC.Data;
+using NHibernate;
 
 namespace FZTH.MVC.Controllers
 {
@@ -14,7 +15,17 @@ namespace FZTH.MVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View("HotelListView", Data.Data.Hotels);
+            ISession aSession = NHibernateHelper.OpenSession();
+            var databaseHelper = new DatabaseHelper(aSession);
+            var list = databaseHelper.GetHotels();
+            var hotelList = new List<Hotel>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                hotelList.Add(HotelEntityToModelConverter.ConvertHotelToModel(list[i]));  
+            }
+
+            //return View("HotelListView", Data.Data.Hotels);  --- hard-coded hotel list
+            return View("HotelListView", hotelList);
         }
 
         [HttpGet]

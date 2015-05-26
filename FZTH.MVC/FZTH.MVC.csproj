@@ -128,11 +128,18 @@
     <Compile Include="Controllers\FooController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
+    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="Entities\Hotel.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="HotelEntityToModelConverter.cs" />
+    <Compile Include="Mappings\HotelMap.cs" />
+    <Compile Include="Mappings\LocationMap.cs" />
     <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\HotelList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
