@@ -17,17 +17,18 @@ namespace FZTH.MVC.Controllers
         {
             ISession aSession = NHibernateHelper.OpenSession();
             var databaseHelper = new DatabaseHelper(aSession);
-            var list = databaseHelper.GetHotels();
+            var entityList = databaseHelper.GetHotels();
             var hotelList = new List<Hotel>();
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < entityList.Count; i++)
             {
-                hotelList.Add(HotelEntityToModelConverter.ConvertHotelToModel(list[i]));  
+                hotelList.Add(HotelEntityToModelConverter.ConvertHotelFromEntityToModel(entityList[i]));  
             }
 
             //return View("HotelListView", Data.Data.Hotels);  --- hard-coded hotel list
             return View("HotelListView", hotelList);
         }
 
+        /*
         [HttpGet]
         public ActionResult Delete(Int32 id)
         {
@@ -47,7 +48,39 @@ namespace FZTH.MVC.Controllers
             Data.Data.Hotels.Remove(h);
             return RedirectToAction("Index");
         }
-        
+        */
+
+        public ActionResult Delete(int id)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var hotel = session.Get<Entities.Hotel>(id);
+                var hotelModel = HotelEntityToModelConverter.ConvertHotelFromEntityToModel(hotel);
+                return View(hotelModel);
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult Delete(int id, Hotel hotel)
+        {
+            try
+            {
+                using (ISession session = NHibernateHelper.OpenSession())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Delete(HotelEntityToModelConverter.ConvertHotelFromModelToEntity(hotel));
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
         
         public ActionResult Create()
         {
@@ -69,6 +102,7 @@ namespace FZTH.MVC.Controllers
         }
          * */
 
+        /*
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Hotel hotel)
         {
@@ -80,8 +114,33 @@ namespace FZTH.MVC.Controllers
             hotel.Id = id + 1;
             Data.Data.Hotels.Add(hotel);
             return RedirectToAction("Index");
+        }*/
+
+        [HttpPost]
+        public ActionResult Create(Hotel hotel)
+        {
+            try
+            {
+                using (ISession session = NHibernateHelper.OpenSession())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        var hotelEntity = new Entities.Hotel();
+                        hotelEntity = HotelEntityToModelConverter.ConvertHotelFromModelToEntity(hotel);
+                        session.Save(hotelEntity);
+                        transaction.Commit();
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
         }
 
+        /*
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -110,6 +169,23 @@ namespace FZTH.MVC.Controllers
                 hotel.Rating = model.Rating;
             }
 
+            return RedirectToAction("Index");
+        }
+         * */
+
+        public ActionResult Edit(int id)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var hotel = session.Get<Entities.Hotel>(id);
+                return View(HotelEntityToModelConverter.ConvertHotelFromEntityToModel(hotel));
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Hotel hotel)
+        {
+            DatabaseHelper.UpdateHotel(id, hotel);
             return RedirectToAction("Index");
         }
 
